@@ -4,13 +4,13 @@ on: [push, pull_request]
 
 jobs:
   build_ubuntu:
-    name: Build Stellarium Web Engine on ${{ matrix.os }}
+    name: Build Stellarium Web Engine on ${{ matrix.os }} with emsdk ${{ matrix.emsdk-version }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        emsdk-version: [1.40.1, latest]
+        emsdk-version: [1.40.1]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -31,18 +31,17 @@ jobs:
       - name: Run Make
         run: |
           #
-          ls
           source ./emsdk/emsdk_env.sh
           make js
 
   build_macos:
-    name: Build Stellarium Web Engine on ${{ matrix.os }}
+    name: Build Stellarium Web Engine on ${{ matrix.os }} with emsdk ${{ matrix.emsdk-version }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [macos-latest]
-        emsdk-version: [1.40.1, latest]
+        emsdk-version: [1.40.1]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -63,6 +62,5 @@ jobs:
       - name: Run Make
         run: |
           #
-          ls
           source ./emsdk/emsdk_env.sh
           make js
