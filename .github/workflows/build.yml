@@ -22,8 +22,7 @@ jobs:
           cd emsdk/
           ./emsdk install 1.40.1
           ./emsdk activate 1.40.1
-          source ./emsdk_env.sh
-          cd ..
+          # source ./emsdk_env.sh
       - name: Run Setup SConstruct
         run: |
           # https://scons.org/doc/production/HTML/scons-user/ch01s02.html
@@ -32,6 +31,7 @@ jobs:
         run: |
           #
           ls
+          source ./emsdk/emsdk_env.sh
           make js
 
   build_macos:
@@ -53,8 +53,7 @@ jobs:
           cd emsdk/
           ./emsdk install 1.40.1
           ./emsdk activate 1.40.1
-          source ./emsdk_env.sh
-          cd ..
+          # source ./emsdk_env.sh
       - name: Run Setup SConstruct
         run: |
           # https://scons.org/doc/production/HTML/scons-user/ch01s02.html
@@ -63,4 +62,5 @@ jobs:
         run: |
           #
           ls
+          source ./emsdk/emsdk_env.sh
           make js
