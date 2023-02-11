@@ -33,3 +33,4 @@ jobs:
           #
           source ./emsdk/emsdk_env.sh
           make js
+          ls html/static/js
