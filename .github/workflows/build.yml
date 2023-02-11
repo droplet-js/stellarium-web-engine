@@ -27,8 +27,12 @@ jobs:
         run: |
           # https://scons.org/doc/production/HTML/scons-user/ch01s02.html
           python -m pip install scons
-      - name: Run Make
+      - name: Run Shell - make js
         run: |
           #
           source ./emsdk/emsdk_env.sh
           make js
+      - name: Run Shell - du
+        run: |
+          #
+          du
