@@ -6,8 +6,43 @@ on:
     types: [published]
 
 jobs:
-  publish:
-    name: Publish
-    runs-on: ubuntu-latest
+  build:
+    name: Publish Stellarium Web Engine on ${{ matrix.os }} with emsdk ${{ matrix.emsdk-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        emsdk-version: [1.40.1]
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Run Setup Emscripten
+        run: |
+          # https://emscripten.org/docs/getting_started/downloads.html
+          git clone https://github.com/emscripten-core/emsdk.git
+          ./emsdk/emsdk install ${{ matrix.emsdk-version }}
+          ./emsdk/emsdk activate ${{ matrix.emsdk-version }}
+          # source ./emsdk/emsdk_env.sh
+      - name: Run Setup SConstruct
+        run: |
+          # https://scons.org/doc/production/HTML/scons-user/ch01s02.html
+          python -m pip install scons
+      - name: Run Shell - make js
+        run: |
+          #
+          source ./emsdk/emsdk_env.sh
+          make js
+      - name: Run Shell - find
+        run: |
+          #
+          find . -name '*.wasm'
+          find . -name 'stellarium-web-engine.*'
+      - uses: actions/upload-artifact@v3
+        with:
+          name: stellarium-web-engine
+          path: |
+            build/stellarium-web-engine.js
+            build/stellarium-web-engine.wasm
