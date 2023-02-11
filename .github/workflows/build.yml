@@ -3,44 +3,13 @@ name: build
 on: [push, pull_request]
 
 jobs:
-  build_ubuntu:
+  build:
     name: Build Stellarium Web Engine on ${{ matrix.os }} with emsdk ${{ matrix.emsdk-version }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
-        emsdk-version: [1.40.1]
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-      - name: Run Setup Emscripten
-        run: |
-          # https://emscripten.org/docs/getting_started/downloads.html
-          git clone https://github.com/emscripten-core/emsdk.git
-          cd emsdk/
-          ./emsdk install ${{ matrix.emsdk-version }}
-          ./emsdk activate ${{ matrix.emsdk-version }}
-          # source ./emsdk_env.sh
-      - name: Run Setup SConstruct
-        run: |
-          # https://scons.org/doc/production/HTML/scons-user/ch01s02.html
-          python -m pip install scons
-      - name: Run Make
-        run: |
-          #
-          source ./emsdk/emsdk_env.sh
-          make js
-
-  build_macos:
-    name: Build Stellarium Web Engine on ${{ matrix.os }} with emsdk ${{ matrix.emsdk-version }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-latest]
+        os: [ubuntu-latest, macos-latest]
         emsdk-version: [1.40.1]
     steps:
       - uses: actions/checkout@v3
