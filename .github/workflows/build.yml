@@ -32,7 +32,8 @@ jobs:
           #
           source ./emsdk/emsdk_env.sh
           make js
-      - name: Run Shell - du
+      - name: Run Shell - find
         run: |
           #
-          du
+          find . -name '*.wasm'
+          find . -name 'stellarium-web-engine.*'
