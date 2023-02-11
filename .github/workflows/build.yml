@@ -20,10 +20,9 @@ jobs:
         run: |
           # https://emscripten.org/docs/getting_started/downloads.html
           git clone https://github.com/emscripten-core/emsdk.git
-          cd emsdk/
-          ./emsdk install ${{ matrix.emsdk-version }}
-          ./emsdk activate ${{ matrix.emsdk-version }}
-          # source ./emsdk_env.sh
+          ./emsdk/emsdk install ${{ matrix.emsdk-version }}
+          ./emsdk/emsdk activate ${{ matrix.emsdk-version }}
+          # source ./emsdk/emsdk_env.sh
       - name: Run Setup SConstruct
         run: |
           # https://scons.org/doc/production/HTML/scons-user/ch01s02.html
@@ -33,5 +32,3 @@ jobs:
           #
           source ./emsdk/emsdk_env.sh
           make js
-          ls apps/simple-html/static/js/
-          ls apps/web-frontend/src/assets/js/
