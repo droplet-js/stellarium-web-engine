@@ -33,4 +33,5 @@ jobs:
           #
           source ./emsdk/emsdk_env.sh
           make js
-          ls html/static/js
+          ls apps/simple-html/static/js/
+          ls apps/web-frontend/src/assets/js/
