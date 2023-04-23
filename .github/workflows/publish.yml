@@ -40,6 +40,14 @@ jobs:
           #
           find . -name '*.wasm'
           find . -name 'stellarium-web-engine.*'
+      - name: Run Shell - ls
+        run: |
+          #
+          ls -a build/
+      - name: Run Shell - tree
+        run: |
+          #
+          tree build
       - uses: actions/upload-artifact@v3
         with:
           name: stellarium-web-engine
